@@ -16,9 +16,12 @@
       font-family: sans-serif;
       background-color: #ededed;
     }
+
     polaris-chip {
       margin: 16px;
-    } a {
+    }
+
+    a {
       margin: 16px;
       color: red;
       background-color: #e76a24;
@@ -30,42 +33,45 @@
 
 <body>
   <h1>polaris-chip</h1>
-  <!-- this is going to do whatever the tag's defaults are -->
   <polaris-chip title="News of Record" link="https://psu.edu/"></polaris-chip>
   <polaris-chip title="Faculty and Staff"></polaris-chip>
   <polaris-chip title="Sports are the only thing that matter"></polaris-chip>
   <polaris-chip title="Grants and donations"></polaris-chip>
 
+  <div class="my-card">
+    <h1>my-card</h1>
+    <my-card></my-card>
 
-  <div class ="my-card">
-  <h1>my-card</h1>
-  <my-card></my-card>
+    <my-card
+      title="Gohan"
+      image="https://www.giantbomb.com/a/uploads/square_medium/15/155548/2295021-adult_gohan_super_saiyan_2.png"
+      link="https://dragonball.fandom.com/wiki/Gohan">
+      <p>This is <strong>Gohan</strong>, the son of Goku. He is a powerful warrior and scholar.</p>
+    </my-card>
 
-  <my-card
-  title="Gohan"
-  image="https://www.giantbomb.com/a/uploads/square_medium/15/155548/2295021-adult_gohan_super_saiyan_2.png"
-  link="https://dragonball.fandom.com/wiki/Gohan">
-  </my-card>
+    <my-card
+      title="Vegeta"
+      image="https://dbz-store.com/cdn/shop/files/Badman_Shirt_1344x1400.png?v=1715870556"
+      link="https://dragonball.fandom.com/wiki/Vegeta"
+      fancy>
+      <p>This is <strong>Vegeta</strong>, the Prince of Saiyans. He is a fierce warrior with a proud heritage.</p>
+    </my-card>
 
-  <my-card
-  title="Vegeta"
-  image="https://dbz-store.com/cdn/shop/files/Badman_Shirt_1344x1400.png?v=1715870556"
-  link="https://dragonball.fandom.com/wiki/Vegeta">
-  </my-card>
+    <my-card
+      title="Bulma"
+      image="https://ladygeekgirl.wordpress.com/wp-content/uploads/2015/07/bulmanameksagaearth01.png"
+      link="https://dragonball.fandom.com/wiki/Bulma">
+      <p>This is <strong>Bulma</strong>, a brilliant scientist and inventor.</p>
+    </my-card>
 
-  <my-card
-  title="Bulma"
-  image="https://ladygeekgirl.wordpress.com/wp-content/uploads/2015/07/bulmanameksagaearth01.png"
-  link="https://dragonball.fandom.com/wiki/Bulma">
-  </my-card>
+    <my-card
+      title="Yamcha"
+      image="https://i.redd.it/yamcha-pose-v0-jkeuhbv0hogd1.jpg?width=437&format=pjpg&auto=webp&s=d9f424433d7374fdeeefdbeee988812719f6fd4b"
+      link="https://dragonball.fandom.com/wiki/Yamcha">
+      <p>This is <strong>Yamcha</strong>, a former bandit turned martial artist.</p>
+    </my-card>
+  </div>
 
-  <my-card
-  title="Yamcha"
-  image="https://i.redd.it/yamcha-pose-v0-jkeuhbv0hogd1.jpg?width=437&format=pjpg&auto=webp&s=d9f424433d7374fdeeefdbeee988812719f6fd4b"
-  link="https://dragonball.fandom.com/wiki/Yamcha">
-  </my-card>
-
-  <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
 </body>
