@@ -1,13 +1,6 @@
 import { LitElement, html, css } from 'lit';
 
-/**
- * Now it's your turn. Here's what we need to try and do:
- * 1. Get you HTML from your card working in here 
- * 2. Get your CSS rescoped as needed to work here
- */
-
 export class MyCard extends LitElement {
-
   static get tag() {
     return 'my-card';
   }
@@ -17,91 +10,95 @@ export class MyCard extends LitElement {
     this.title = "Trunks";
     this.image = "https://ih1.redbubble.net/image.5646336836.3130/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.u1.jpg";
     this.link = "https://dragonball.fandom.com/wiki/Trunks";
-    this.text = ' ';
-    this.text2 = " ";
     this.fancy = false;
   }
 
   static get styles() {
     return css`
       :host {
-        display: block;
+        display: inline-block;
+        margin: 16px;
+        width: 300px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
       }
+
       :host([fancy]) {
-        display: block;
-          background-color: pink;
-          border: 2px solid fuchsia;
-          box-shadow: 10px 5px 5px red;
-}
+        background-color: pink;
+        border: 2px solid fuchsia;
+        box-shadow: 10px 5px 5px red;
+      }
+
       .card {
-        font-size: 1em;
-        display: inline-flex;
-        border: 2px solid grey;
-        padding: 8px;
-        margin: 0;
-        opacity: 0.8;
-        background-color: purple; 
-        transition: 0.6s all ease-in-out;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
       }
 
       .card-image {
-        width: 200px;
-        height: auto; 
-      }
-
-      .card-content {
-        width: 300px;
-        padding: 0 8px 8px 8px;
-        color: black;
-        background-color: white;
-        margin: 0 0 0 8px;
-        height: 300px; 
-        overflow: auto;
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: cover;
       }
 
       .card-title {
-        position: sticky;
-        top: 0;
-        background-color: #9A4EAE;
+        font-size: 1.5em;
         text-align: center;
-        font-size: 2em;
-        padding: 8px 8px 16px;
-        margin: 0 -8px;
-      }
-
-      .card-list {
+        padding: 16px;
         margin: 0;
-        padding: 0 32px;
+        background-color: #9A4EAE;
+        color: white;
       }
 
-      .card-list li {
-        padding: 8px 16px;
-        list-style: square;
+      details {
+        padding: 16px;
+        flex-grow: 1;
+      }
+
+      details summary {
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 8px;
+      }
+
+      details div {
+        border: 1px solid #ccc;
+        padding: 8px;
+        margin-top: 8px;
+        background-color: #f9f9f9;
+        border-radius: 4px;
+        max-height: 150px;
+        overflow-y: auto;
       }
 
       .btn {
-        color: #efa926;
-        background-color: white;
-        font-size: 15px;
-        margin: 0px 0px 5px 0px;
-      }
-      .btn:focus,
-      .btn:hover {
-        background-color: red;
+        display: block;
+        width: 100%;
+        padding: 8px;
+        margin-top: 8px;
+        background-color: #efa926;
         color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+      }
+
+      .btn:hover {
+        background-color: #d18e1f;
       }
     `;
   }
 
   openChanged(e) {
-    console.log(e);
-    if (e.target.getAttribute('open') !== null)  {
-      this.fancy = true;
-    }
-    else {
-      this.fancy = false;
-    }
-
+    this.fancy = e.target.hasAttribute('open');
   }
 
   render() {
@@ -109,17 +106,16 @@ export class MyCard extends LitElement {
       <div class="card">
         <h1 class="card-title">${this.title}</h1>
         <img src=${this.image} alt=${this.title} class="card-image" />
-        <details ?open="${this.fancy}">
+        <details ?open="${this.fancy}" @toggle="${this.openChanged}">
           <summary>Description</summary>
           <div>
             <slot></slot>
             <a href=${this.link} target="_blank">
-                <button class="btn"><em>Link to more information!</em></button>
-            </a>  
+              <button class="btn"><em>Link to more information!</em></button>
+            </a>
           </div>
-      </details>
-
-    </div>
+        </details>
+      </div>
     `;
   }
 
@@ -128,10 +124,7 @@ export class MyCard extends LitElement {
       title: { type: String },
       image: { type: String },
       link: { type: String },
-      buttonTitle: { type: String, attribute: "button-title" },
-      text: { type: String },
-      text2: { type: String },
-      fancy: { type: Boolean, reflect: true }
+      fancy: { type: Boolean, reflect: true },
     };
   }
 }
