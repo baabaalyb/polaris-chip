@@ -17,6 +17,9 @@ export class MyCard extends LitElement {
     this.title = "Trunks";
     this.image = "https://ih1.redbubble.net/image.5646336836.3130/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.u1.jpg";
     this.link = "https://dragonball.fandom.com/wiki/Trunks";
+    this.text = ' ';
+    this.text2 = " ";
+    this.fancy = false;
   }
 
   static get styles() {
@@ -24,6 +27,12 @@ export class MyCard extends LitElement {
       :host {
         display: block;
       }
+      :host([fancy]) {
+        display: block;
+          background-color: pink;
+          border: 2px solid fuchsia;
+          box-shadow: 10px 5px 5px red;
+}
       .card {
         font-size: 1em;
         display: inline-flex;
@@ -31,7 +40,7 @@ export class MyCard extends LitElement {
         padding: 8px;
         margin: 0;
         opacity: 0.8;
-        background-color: purple;
+        background-color: purple; 
         transition: 0.6s all ease-in-out;
       }
 
@@ -84,16 +93,33 @@ export class MyCard extends LitElement {
     `;
   }
 
+  openChanged(e) {
+    console.log(e);
+    if (e.target.getAttribute('open') !== null)  {
+      this.fancy = true;
+    }
+    else {
+      this.fancy = false;
+    }
+
+  }
+
   render() {
     return html`
       <div class="card">
         <h1 class="card-title">${this.title}</h1>
         <img src=${this.image} alt=${this.title} class="card-image" />
-        <p>Trunks is a Saiyan/Human hybrid and the son of Vegeta and Bulma.</p>
-        <a href=${this.link} target="_blank">
-          <button class="btn"><em>Details</em></button>
-        </a>  
-      </div>
+        <details ?open="${this.fancy}">
+          <summary>Description</summary>
+          <div>
+            <slot></slot>
+            <a href=${this.link} target="_blank">
+                <button class="btn"><em>Link to more information!</em></button>
+            </a>  
+          </div>
+      </details>
+
+    </div>
     `;
   }
 
@@ -102,6 +128,10 @@ export class MyCard extends LitElement {
       title: { type: String },
       image: { type: String },
       link: { type: String },
+      buttonTitle: { type: String, attribute: "button-title" },
+      text: { type: String },
+      text2: { type: String },
+      fancy: { type: Boolean, reflect: true }
     };
   }
 }
